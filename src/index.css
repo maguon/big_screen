@@ -19,7 +19,10 @@ html, body, #root {
 	overflow-x:hidden;
 	overflow-y:auto;
 }
-body {background-image:url("./assets/images/bg.png");}
+body {
+	background-color: #06033b;
+	/* background-image:url("./assets/images/bg.png"); */
+}
 table{
 	height: 100%;
 	overflow-y: auto;
@@ -33,11 +36,12 @@ td{
 	padding: 8px;
 }
 .content_title{
-	width: 200px;
 	text-align: center;
-	color: #01c4f7;
-	font-size: 14px;
+	color: #FFF;
+	font-size: 18px;
+	font-weight: 500;
 	position: absolute;
+	letter-spacing: 1px;
 	top: 0;
 	left: 50%;
 	margin-left: -100px;
@@ -78,8 +82,8 @@ td{
 	min-width: 280px;
 	min-height: 280px;
 	transform: translate(-50%,-50%);
-	background: url("./assets/images/map.png") center no-repeat;
-	background-size: 45.8vh 45.8vh;
+	background: url("./assets/images/area.png") center no-repeat;
+	background-size: cover;
 	opacity: 0.5;
 }
 .circle_allow{
@@ -109,7 +113,7 @@ td{
 	opacity: 0.4;
 }
 .left_bg{
-	width: 62%;
+	width: 50%;
     height: 100%;
     position: absolute;
     right: 0;
@@ -117,7 +121,7 @@ td{
 	background:url("./assets/images/left_header.png") 0 10px no-repeat;
 }
 .right_bg{
-	width: 53%;
+	width: 50%;
     height: 100%;
     position: absolute;
     top: 0;
