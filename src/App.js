@@ -12,6 +12,7 @@ import './App.css';
 import { apiHost, fileHost } from './config';
 import { getDate, getDateTime, hidePhone } from './utils/CommonUtil';
 import NumberCard from './components/NumberCard';
+import { getLocalItem, setLocalItem } from './utils/LocalUtils';
 const httpUtil = require('./utils/HttpUtils');
 
 const App = () => {
@@ -333,6 +334,14 @@ const App = () => {
     }
   }
 
+  const getSysToken = async () => {
+    const url = apiHost + '/public/adminT_Token';
+    const res = await httpUtil.httpGet(url);
+    if(res && res.success){
+      setLocalItem('auth-token',res.data.list[0].token)
+    }
+  }
+
   const getUserOptStat = async () => {
     try{
       const params = {}
@@ -413,6 +422,7 @@ const App = () => {
     });
   }
   useEffect(() => {
+    getSysToken();
     getLastestUserActive();
     getLastestBizPos();
     getLastestUserReg();
