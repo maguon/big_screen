@@ -72,35 +72,35 @@ const App = () => {
       console.log(url)
       console.log(res)
       if (res.success === true) { 
-          const resList = res.data.list;
-          let xData = [];
-          let yData = [];
-          for(let i =  resList.length ;i>0;i--) {
-              xData.push(resList[i-1].id);
-              yData.push(resList[i-1].user_count);
-          }
-          const userDayStatBarChart = echarts.init(document.getElementById('user_day_stat_div'));
-          userDayStatBarChart.setOption({  
-              color: ['#1370fb'],              
-              tooltip: {},
-              xAxis: {
-                  data: xData
-              },
-              yAxis: {splitLine: { show: false } },
-              series: [
-                  {
-                  name: '注册',
-                  type: 'bar',
-                  data: yData
-                  }
-              ]
-          });
+        const resList = res.data.list;
+        let xData = [];
+        let yData = [];
+        for(let i =  resList.length ;i>0;i--) {
+            xData.push(resList[i-1].id);
+            yData.push(resList[i-1].user_count);
+        }
+        const userDayStatBarChart = echarts.init(document.getElementById('user_day_stat_div'));
+        userDayStatBarChart.setOption({  
+            color: ['#1370fb'],              
+            tooltip: {},
+            xAxis: {
+                data: xData
+            },
+            yAxis: {splitLine: { show: false } },
+            series: [
+                {
+                name: '注册',
+                type: 'bar',
+                data: yData
+                }
+            ]
+        });
       } else if (res.success === false) {
-          return []
+        return []
       }
     } catch (err) {
-        console.log(err)
-        return [] ;
+      console.log(err)
+      return [] ;
     }
   }
 
@@ -114,25 +114,25 @@ const App = () => {
       url = conditions.length > 0 ? url + "&" + conditions : url;
       const res = await httpUtil.httpGet(url);
       if (res.success === true) { 
-          const resList = res.data.list;
-          const data = [];
-          resList.map(item => {
-            data.push([item.name,hidePhone(item.phone),getDate(item.CreatedAt)])
-          })
-          setUserList({   
-            header:['姓名','电话','注册时间'],
-            data: data,
-            rowNum:8,
-            index: false,
-            align: ['center']
-          })
+        const resList = res.data.list;
+        const data = [];
+        resList.map(item => {
+          data.push([item.name,hidePhone(item.phone),getDate(item.CreatedAt)])
+        })
+        setUserList({   
+          header:['姓名','电话','注册时间'],
+          data: data,
+          rowNum:8,
+          index: false,
+          align: ['center']
+        })
           
       } else if (res.success === false) {
-          return []
+        return []
       }
     } catch (err) {
-        console.log(err)
-        return [] ;
+      console.log(err)
+      return [] ;
     }
   }
 
@@ -145,58 +145,58 @@ const App = () => {
       url = conditions.length > 0 ? url + "&" + conditions : url;
       const res = await httpUtil.httpGet(url);
       if (res.success === true) { 
-          const resList = res.data.list;
-          let xData = [];
-          let yData = [];
-          const userCountArr =[];
-          const bizCountArr =[];
-          const userMpCountArr =[];
-          for(let i =  resList.length ;i>0;i--) {
-              //console.log(resList[i-1].id.toString().slice(4,8))
-              xData.push(resList[i-1].id.toString().slice(4,8));
-              yData.push(resList[i-1].userCount);
-              userCountArr.push(resList[i-1].userCount);
-              userMpCountArr.push(resList[i-1].userMpCount);
-              bizCountArr.push(resList[i-1].bizCount);
-          }
-          const userDayStatBarChart = echarts.init(document.getElementById('user_day_stat_div'), 'dark');
-          userDayStatBarChart.setOption({  
-            backgroundColor:'transparent',
-            legend: {
-              textStyle: {
-                color: '#FFF',
-              },
-              data: ['求职', '企业']
+        const resList = res.data.list;
+        let xData = [];
+        let yData = [];
+        const userCountArr =[];
+        const bizCountArr =[];
+        const userMpCountArr =[];
+        for(let i =  resList.length ;i>0;i--) {
+            //console.log(resList[i-1].id.toString().slice(4,8))
+            xData.push(resList[i-1].id.toString().slice(4,8));
+            yData.push(resList[i-1].userCount);
+            userCountArr.push(resList[i-1].userCount);
+            userMpCountArr.push(resList[i-1].userMpCount);
+            bizCountArr.push(resList[i-1].bizCount);
+        }
+        const userDayStatBarChart = echarts.init(document.getElementById('user_day_stat_div'), 'dark');
+        userDayStatBarChart.setOption({  
+          backgroundColor:'transparent',
+          legend: {
+            textStyle: {
+              color: '#FFF',
             },
-            tooltip: {},
-            xAxis: {
-                data: xData
+            data: ['求职', '企业']
+          },
+          tooltip: {},
+          xAxis: {
+              data: xData
+          },
+          yAxis: {
+            splitLine: { show: true },
+            textStyle: {
+              color: '#FFF',
             },
-            yAxis: {
-              splitLine: { show: true },
-              textStyle: {
-                color: '#FFF',
-              },
+          },
+          series: [
+            {
+              name: '求职',
+              type: 'bar',
+              data: userCountArr
             },
-            series: [
-                {
-                  name: '求职',
-                  type: 'bar',
-                  data: userCountArr
-                },
-                {
-                  name: '企业',
-                  type: 'bar',
-                  data: bizCountArr
-                }
-            ]
-          });
+            {
+              name: '企业',
+              type: 'bar',
+              data: bizCountArr
+            }
+          ]
+        });
       } else if (res.success === false) {
-          return []
+        return []
       }
     } catch (err) {
-        console.log(err)
-        return [] ;
+      console.log(err)
+      return [] ;
     }
   }
 
@@ -224,11 +224,11 @@ const App = () => {
         })
           
       } else if (res.success === false) {
-          return []
+        return []
       }
     } catch (err) {
-        console.log(err)
-        return [] ;
+      console.log(err)
+      return [] ;
     }
   }
 
@@ -237,15 +237,15 @@ const App = () => {
       let url = apiHost + '/admin/userTotalStat?';
       const res = await httpUtil.httpGet(url);
       if (res.success === true) { 
-          const resList = res.data.list;
-          setTotalUser(resList[0].user_count)
+        const resList = res.data.list;
+        setTotalUser(resList[0].user_count)
           
       } else if (res.success === false) {
-          return 0
+        return 0
       }
     } catch (err) {
-        console.log(err)
-        return 0 ;
+      console.log(err)
+      return 0 ;
     }
   }
 
@@ -254,15 +254,15 @@ const App = () => {
       let url = apiHost + '/admin/bizTotalStat?';
       const res = await httpUtil.httpGet(url);
       if (res.success === true) { 
-          const resList = res.data.list;
-          setTotalBiz(resList[0].biz_count)
+        const resList = res.data.list;
+        setTotalBiz(resList[0].biz_count)
           
       } else if (res.success === false) {
-          return 0
+        return 0
       }
     } catch (err) {
-        console.log(err)
-        return 0 ;
+      console.log(err)
+      return 0 ;
     }
   }
 
@@ -271,15 +271,15 @@ const App = () => {
       let url = fileHost + '/public/posView?';
       const res = await httpUtil.httpGet(url);
       if (res.success === true) { 
-          const resList = res.data;
-          setTotalPosView(resList.total_count)
+        const resList = res.data;
+        setTotalPosView(resList.total_count)
           
       } else if (res.success === false) {
-          return 0
+        return 0
       }
     } catch (err) {
-        console.log(err)
-        return 0 ;
+      console.log(err)
+      return 0 ;
     }
   }
 
@@ -288,15 +288,15 @@ const App = () => {
       let url = fileHost + '/public/posTelView?';
       const res = await httpUtil.httpGet(url);
       if (res.success === true) { 
-          const resList = res.data;
-          setTotalTelView(resList.total_count)
+        const resList = res.data;
+        setTotalTelView(resList.total_count)
           
       } else if (res.success === false) {
-          return 0
+        return 0
       }
     } catch (err) {
-        console.log(err)
-        return 0 ;
+      console.log(err)
+      return 0 ;
     }
   }
 
@@ -310,27 +310,25 @@ const App = () => {
       url = conditions.length > 0 ? url + "&" + conditions : url;
       const res = await httpUtil.httpGet(url);
       if (res.success === true) { 
-          const resList = res.data.list;
-          const data = [];
-          resList.map(item => {
-            data.push({
-              name: item.jobTypeName,
-              value: item.jobTypeCount
-            });
-          })
-          
-          setJobTypeStat({
-            data: data.slice(0,10),
-            rowNum: 7,
-            carousel: 'single'
-          })
-          
+        const resList = res.data.list;
+        const data = [];
+        resList.map(item => {
+          data.push({
+            name: item.jobTypeName,
+            value: item.jobTypeCount
+          });
+        })        
+        setJobTypeStat({
+          data: data.slice(0,10),
+          rowNum: 7,
+          carousel: 'single'
+        })          
       } else if (res.success === false) {
           return []
       }
     } catch (err) {
-        console.log(err)
-        return [] ;
+      console.log(err)
+      return [] ;
     }
   }
 
@@ -350,37 +348,37 @@ const App = () => {
       url = conditions.length > 0 ? url + "&" + conditions : url;
       const res = await httpUtil.httpGet(url);
       if (res.success === true) { 
-          const resList = res.data.list;
-          const data = [];
-          for(let i=0;i<8;i++){
-            data.push({
-              name: resList[i].name,
-              value: resList[i].opt_count
-            });
-          }
-          const userOptPieChart = echarts.init(document.getElementById('user_opt_stat_div'));
-          userOptPieChart.setOption({  
-            tooltip: {
-              trigger: 'item'
-            },
-            series: [
-              {
-                name: '',
-                type: 'pie',
-                radius: '50%',
-                showDataShadow: true,
-                showLabel: true,
-                data: data,
-                emphasis: {
-                  itemStyle: {
-                    shadowBlur: 100,
-                    shadowOffsetX: 10,
-                    shadowColor: 'rgba(0, 0, 0, 0.8)'
-                  }
+        const resList = res.data.list;
+        const data = [];
+        for(let i=0;i<8;i++){
+          data.push({
+            name: resList[i].name,
+            value: resList[i].opt_count
+          });
+        }
+        const userOptPieChart = echarts.init(document.getElementById('user_opt_stat_div'));
+        userOptPieChart.setOption({  
+          tooltip: {
+            trigger: 'item'
+          },
+          series: [
+            {
+              name: '',
+              type: 'pie',
+              radius: '50%',
+              showDataShadow: true,
+              showLabel: true,
+              data: data,
+              emphasis: {
+                itemStyle: {
+                  shadowBlur: 100,
+                  shadowOffsetX: 10,
+                  shadowColor: 'rgba(0, 0, 0, 0.8)'
                 }
               }
-            ]
-          });
+            }
+          ]
+        });
           
       } else if (res.success === false) {
           return []
@@ -400,21 +398,20 @@ const App = () => {
             radius: '60%',
             center: ['50%', '50%'],
             data: [
-                {value: 135, name: '500-999人'},
-                {value: 20, name: '10000人以上'},
-                {value: 74, name: '1000-9999'},
-                {value: 265, name: '100-499人'},
-                {value: 372, name: '50-99人'},
-                {value: 500, name: '50人以下'}
+              {value: 135, name: '500-999人'},
+              {value: 20, name: '10000人以上'},
+              {value: 74, name: '1000-9999'},
+              {value: 265, name: '100-499人'},
+              {value: 372, name: '50-99人'},
+              {value: 500, name: '50人以下'}
             ],
             tooltip: {
               trigger: 'item',
               formatter: '{b} : {c} ({d}%)'
             },
             itemStyle: {
-                
-                shadowBlur: 200,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              shadowBlur: 200,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
             },
 
         }
