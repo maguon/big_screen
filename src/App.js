@@ -429,6 +429,7 @@ const App = () => {
     getBizTotalStat();
     getPosViewTotalStat();
     getTelViewTotalStat();
+    alert(window.screenX+":"+window.screenY);
     setInterval(() => {
       getUserTotalStat();
       getBizTotalStat();
